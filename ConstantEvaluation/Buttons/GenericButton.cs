@@ -12,7 +12,7 @@ namespace ConstantEvaluation.Buttons
 
         protected WebDriverWait wait;
         protected string waitOption;
-        protected Waits waitOptionImplementation;
+        protected Wait waitOptionImplementation;
 
         protected IWebElement buttonWebElement;
         protected string displayedClass;
@@ -71,7 +71,7 @@ namespace ConstantEvaluation.Buttons
             }
 
             buttonWebElement.Click();
-            waitOptionImplementation = new Waits(wait, waitOption);
+            waitOptionImplementation = new Wait(wait, waitOption);
         }
 
 
@@ -86,36 +86,49 @@ namespace ConstantEvaluation.Buttons
         }
 
         /// <summary>
-        /// Creates an object.
+        /// Creates an object using passed <code>IWebElement</code> and <code>WebDriverWait</code>.
         /// </summary>
-        /// <param name="driver"> is passed IWebDriver in the actual state.</param>
-        /// <param name="driver"> is passed IWebDriver in the actual state.</param>
+        /// <param name="buttonWebElement">Represents <code>IWebElement</code> of a given page button.</param>
+        /// <param name="wait">Represents <code>WebDriverWait</code> init setting.</param>
         public GenericButton(IWebElement buttonWebElement, WebDriverWait wait)
         {
             this.wait = wait;
             this.buttonWebElement = buttonWebElement;
         }
 
-        public GenericButton(IWebElement buttonWebElement, WebDriverWait wait, string waitOption)
+        /// <summary>
+        /// Creates an object using passed <code>IWebElement</code> and <code>WebDriverWait</code>. Then wait class constructor is called with usage of wait option passed as an argument.
+        /// </summary>
+        /// <param name="buttonWebElement">Represents <code>IWebElement</code> of a given page button.</param>
+        /// <param name="wait">Represents <code>WebDriverWait</code> init setting.</param>
+        /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param>
+        public GenericButton(IWebElement buttonWebElement, WebDriverWait wait, string waitOption) : this(buttonWebElement, wait)
         {
-            this.wait = wait;
             this.waitOption = waitOption;
-            this.buttonWebElement = buttonWebElement;
         }
 
         /// <summary>
-        /// Creates a new object. Firstly awaits for the projects list to be displayed and then initialize its field with it. 
+        /// Creates an object using passed <code>IWebElement</code> and <code>string</code> to set a child element using id locator. Then <code>WebDriverWait</code> is used to set wait field.
         /// </summary>
-        /// <exception cref="System.Exception">Thrown when actual URL adress is different than https:\/\/tms.lionbridge.com\/</exception>
-        /// <exception cref="System.Exception">Thrown when initialized project list is lesser or equal to 0. In this case it is a blocker.</exception>
-        /// <param name="driver"> is passed IWebDriver in the actual state.</param>
-        public GenericButton(IWebElement parentElement, string idLocator, WebDriverWait wait)
+        /// <param name="buttonParentElement">Represents parent <code>IWebElement</code> for initalized button object.</param>
+        /// <param name="buttonIdLocator">Represents an id locator for the button object.</param>
+        /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
+        public GenericButton(IWebElement buttonParentElement, string buttonIdLocator, WebDriverWait wait) : this(buttonParentElement.FindElements(By.Id(buttonIdLocator)).FirstOrDefault(), wait)
         {
-            IReadOnlyCollection<IWebElement> auxiliaryCollection;
-            this.wait = wait;
 
-            auxiliaryCollection = parentElement.FindElements(By.Id(idLocator));
-            if (auxiliaryCollection.Count == 1) buttonWebElement = auxiliaryCollection.ElementAt(0);
+        }
+
+        /// <summary>
+        /// Creates an object using passed <code>IWebElement</code> and <code>string</code> to set a child element using id locator. Then <code>WebDriverWait</code> is used to set wait field and wait option to call a 
+        /// wait object constructor. 
+        /// </summary>
+        /// <param name="buttonParentElement">Represents parent <code>IWebElement</code> for initalized button object.</param>
+        /// <param name="buttonIdLocator">Represents an id locator for the button object.</param>
+        /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
+        /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param> 
+        public GenericButton(IWebElement buttonParentElement, string buttonIdLocator, WebDriverWait wait, string waitOption) : this(buttonParentElement.FindElements(By.Id(buttonIdLocator)).FirstOrDefault(), wait, waitOption)
+        {
+
         }
     }
 }

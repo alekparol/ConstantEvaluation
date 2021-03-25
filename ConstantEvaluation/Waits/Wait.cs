@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConstantEvaluation
 {
-    public class Waits
+    public class Wait
     {
 
         private static string cupLoadingId = "cup_lod";
@@ -43,7 +43,7 @@ namespace ConstantEvaluation
         }
 
 
-        public Waits(WebDriverWait wait, string waitOption)
+        public Wait(WebDriverWait wait, string waitOption)
         {
             switch(waitOption)
             {
