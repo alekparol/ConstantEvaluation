@@ -1,0 +1,12 @@
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\obj\Debug\ConstantEvaluation.csprojAssemblyReference.cache
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\obj\Debug\ConstantEvaluation.csproj.CoreCompileInputs.cache
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\bin\Debug\ConstantEvaluation.exe.config
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\bin\Debug\ConstantEvaluation.exe
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\bin\Debug\ConstantEvaluation.pdb
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\bin\Debug\WebDriver.dll
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\bin\Debug\WebDriver.Support.dll
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\bin\Debug\WebDriver.xml
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\bin\Debug\WebDriver.Support.xml
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\obj\Debug\ConstantEvaluation.csproj.CopyComplete
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\obj\Debug\ConstantEvaluation.exe
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\obj\Debug\ConstantEvaluation.pdb
