@@ -42,6 +42,16 @@ namespace ConstantEvaluation
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpathLocator)));
         }
 
+        public void ClickableTasks(WebDriverWait wait)
+        {
+            ClickableWait(wait, "//*[@id=\"tasks\"]");
+        }
+
+        public void ClickableProjects(WebDriverWait wait)
+        {
+            ClickableWait(wait, "//*[@class=\"dsh_tds_ttl\"]");
+        }
+
 
         public Wait(WebDriverWait wait, string waitOption)
         {
@@ -49,6 +59,12 @@ namespace ConstantEvaluation
             {
                 case "LoadingCup":
                     LoadingWait(wait, cupLoadingId);
+                    break;
+                case "ProjectsListReady":
+                    ClickableProjects(wait);
+                    break;
+                case "ProjectHomePage":
+                    ClickableTasks(wait);
                     break;
             }
         }

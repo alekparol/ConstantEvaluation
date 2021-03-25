@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using ConstantEvaluation.Buttons;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace ConstantEvaluation.Pages
         /* Fields */
 
         protected IWebDriver driver;
+        protected WebDriverWait wait;
 
         protected IReadOnlyCollection<IWebElement> projectsList;
 
@@ -40,10 +42,13 @@ namespace ConstantEvaluation.Pages
                                                                           .Equals(chosenProjectName.ToLower()));
 
             if (chosenProject == null) throw new Exception(String.Format("TMS project of a name {0} not found on the home page.", chosenProjectName));
-            chosenProject.Click();
 
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("newtasks")));
+            ProjectListButton projectListButton = new ProjectListButton(chosenProject, wait);
+            projectListButton.ButtonClick();
+
+            //chosenProject.Click();
+            //var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+            //wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("newtasks")));
         }
 
         /* Constructors */
@@ -56,15 +61,16 @@ namespace ConstantEvaluation.Pages
         /// <param name="driver"> is passed IWebDriver in the actual state.</param>
         public TMSProjectsPage(IWebDriver driver)
         {
-            this.driver = driver;
-
             if (driver.Url != "https://tms.lionbridge.com/")
             {
                 throw new Exception("URL address is not equal to https://tms.lionbridge.com/.");
             }
 
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.ClassName("dsh_tds_ttl")));
+            this.driver = driver;
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+
+            Wait waitImplementation = new Wait(wait, "ProjectsListReady");
+            //wait.Until(ExpectedConditions.ElementToBeClickable(By.ClassName("dsh_tds_ttl")));
 
             projectsList = driver.FindElements(By.ClassName("dsh_tds_ttl"));
 

@@ -54,9 +54,11 @@
   <ItemGroup>
     <Compile Include="Buttons\Button.cs" />
     <Compile Include="Buttons\FilterInitButton.cs" />
+    <Compile Include="Buttons\GenericButton.cs" />
     <Compile Include="Buttons\LeftMenuButton.cs" />
     <Compile Include="Buttons\ListMenuButton.cs" />
     <Compile Include="Buttons\NavBarButton.cs" />
+    <Compile Include="Buttons\ProjectListButton.cs" />
     <Compile Include="Data\AssigneeData.cs" />
     <Compile Include="Data\AssigneeDataElement.cs" />
     <Compile Include="Drop Down Menus\DropDown.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="View Section Element\NavBar.cs" />
     <Compile Include="View Section Element\Status Elements\StatusFiltersPanel.cs" />
     <Compile Include="View Section Element\Status Elements\StatusNavBar.cs" />
+    <Compile Include="Waits\Wait.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
