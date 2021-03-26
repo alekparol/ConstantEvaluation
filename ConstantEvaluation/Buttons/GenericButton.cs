@@ -29,42 +29,6 @@ namespace ConstantEvaluation.Buttons
             }
         }
 
-        /// <summary>
-        /// Returns an integer value representing the fact of button being clicked. This is evalueted by checking if button web element is a representant of a class denoting all selected elements. It varies for different
-        /// button types. 
-        /// </summary>
-        /// <returns>-1</returns> if button is null,
-        /// <returns>-2</returns> if there is no class name representing clicked button.
-        /// <returns>0</returns> if button is not clicked and <returns>1</returns> otherwise.  
-        public int ButtonIsClicked
-        {
-            get
-            {
-                if (buttonWebElement != null)
-                {
-                    if (displayedClass != String.Empty)
-                    {
-                        if (buttonWebElement.GetAttribute("class").Contains(displayedClass))
-                        {
-                            return 1;
-                        }
-                        else
-                        {
-                            return 0;
-                        }
-                    }
-                    else
-                    {
-                        return -2;
-                    }
-                }
-                else
-                {
-                    return -1;
-                }
-            }
-        }
-
         /* Methods */
 
         /// <summary>

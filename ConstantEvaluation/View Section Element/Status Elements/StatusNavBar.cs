@@ -17,6 +17,8 @@ namespace ConstantEvaluation.View_Section_Element.Status_Elements
         private NavBarButton files;
         private NavBarButton assignees;
 
+        protected WebDriverWait wait;
+
         /* Properties */
 
         public NavBarButton Activities
@@ -86,10 +88,12 @@ namespace ConstantEvaluation.View_Section_Element.Status_Elements
                 throw new Exception("URL address is not equal to https://tms.lionbridge.com/.");
             }
 
-            activities = new NavBarButton(navBarPanel, driver, "status");
-            alerts = new NavBarButton(navBarPanel, driver, "statusalerts");
-            files = new NavBarButton(navBarPanel, driver, "statusfiles");
-            assignees = new NavBarButton(navBarPanel, driver, "statusassignees");
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+
+            activities = new NavBarButton(navBarPanel, "status", wait);
+            alerts = new NavBarButton(navBarPanel, "statusalerts", wait);
+            files = new NavBarButton(navBarPanel, "statusfiles", wait);
+            assignees = new NavBarButton(navBarPanel, "statusassignees", wait);
         }
     }
 }

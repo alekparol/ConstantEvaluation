@@ -33,14 +33,12 @@ namespace ConstantEvaluation.Pages
         /* Methods */
 
         /// <summary>
-        /// Clicks on the first project thats name matches with the passed argument and then awaits for project page to be displayed.
+        /// Clicks on the first project's button thats name matches the passed argument and then awaits for project page to be displayed.
         /// </summary>
-        /// <param name="chosenProjectName"> denotes the name of the TMS project one wants to enter.</param>
+        /// <param name="chosenProjectName"> Represents the name of the TMS project one wants to enter.</param>
         public void ClickChosenProject(string chosenProjectName)
         {
-            IWebElement chosenProject = projectsList.FirstOrDefault(x => x.Text.ToLower()
-                                                                          .Equals(chosenProjectName.ToLower()));
-
+            IWebElement chosenProject = projectsList.FirstOrDefault(x => x.Text.ToLower().Equals(chosenProjectName.ToLower()));
             if (chosenProject == null) throw new Exception(String.Format("TMS project of a name {0} not found on the home page.", chosenProjectName));
 
             ProjectListButton projectListButton = new ProjectListButton(chosenProject, wait);
@@ -70,14 +68,13 @@ namespace ConstantEvaluation.Pages
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 
             Wait waitImplementation = new Wait(wait, "ProjectsListReady");
-            //wait.Until(ExpectedConditions.ElementToBeClickable(By.ClassName("dsh_tds_ttl")));
-
             projectsList = driver.FindElements(By.ClassName("dsh_tds_ttl"));
 
             if (projectsList.Count <= 0)
             {
                 throw new Exception(String.Format("Projects list was not initialized properly."));
             }
+            //wait.Until(ExpectedConditions.ElementToBeClickable(By.ClassName("dsh_tds_ttl")));
         }
     }
 }

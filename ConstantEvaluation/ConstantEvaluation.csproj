@@ -105,6 +105,7 @@
     <Compile Include="View Section Element\NavBar.cs" />
     <Compile Include="View Section Element\Status Elements\StatusFiltersPanel.cs" />
     <Compile Include="View Section Element\Status Elements\StatusNavBar.cs" />
+    <Compile Include="Waits\Enums.cs" />
     <Compile Include="Waits\Wait.cs" />
   </ItemGroup>
   <ItemGroup>
