@@ -10,8 +10,10 @@ namespace ConstantEvaluation.Buttons
     {
         /* Fields */
 
-        protected string displayedClass = "hdr_sub_sel";
+        new protected string waitOption = "ProjectHomePageButtonClick";
 
+        protected string displayedClass = "hdr_sub_sel";
+        
         /* Properties */
 
         /// <summary>
@@ -52,7 +54,7 @@ namespace ConstantEvaluation.Buttons
 
         /* Methods */
 
-        /* Constructors */
+        /* Constructors  buttonXPathLocator*/
 
         /// <summary>
         /// Creates an empty object.
@@ -87,9 +89,9 @@ namespace ConstantEvaluation.Buttons
         /// Creates an object using passed <code>IWebElement</code> and <code>string</code> to set a child element using id locator. Then <code>WebDriverWait</code> is used to set wait field.
         /// </summary>
         /// <param name="buttonParentElement">Represents parent <code>IWebElement</code> for initalized button object.</param>
-        /// <param name="buttonIdLocator">Represents an id locator for the button object.</param>
+        /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
-        public NavBarButton(IWebElement buttonParentElement, string buttonIdLocator, WebDriverWait wait) : base(buttonParentElement, buttonIdLocator, wait)
+        public NavBarButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait) : base(buttonParentElement, buttonXPathLocator, wait)
         {
 
         }
@@ -99,10 +101,10 @@ namespace ConstantEvaluation.Buttons
         /// wait object constructor. 
         /// </summary>
         /// <param name="buttonParentElement">Represents parent <code>IWebElement</code> for initalized button object.</param>
-        /// <param name="buttonIdLocator">Represents an id locator for the button object.</param>
+        /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
         /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param> 
-        public NavBarButton(IWebElement buttonParentElement, string buttonIdLocator, WebDriverWait wait, string waitOption) : base(buttonParentElement, buttonIdLocator, wait, waitOption)
+        public NavBarButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait, string waitOption) : base(buttonParentElement, buttonXPathLocator, wait, waitOption)
         {
 
         }

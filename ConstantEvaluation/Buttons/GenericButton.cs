@@ -14,7 +14,6 @@ namespace ConstantEvaluation.Buttons
         protected Wait waitOptionImplementation;
 
         protected IWebElement buttonWebElement;
-        protected string displayedClass;
 
         /* Properties */
 
@@ -45,7 +44,6 @@ namespace ConstantEvaluation.Buttons
             buttonWebElement.Click();
             waitOptionImplementation = new Wait(wait, waitOption);
         }
-
 
         /* Constructors */
 
@@ -83,9 +81,9 @@ namespace ConstantEvaluation.Buttons
         /// Creates an object using passed <code>IWebElement</code> and <code>string</code> to set a child element using id locator. Then <code>WebDriverWait</code> is used to set wait field.
         /// </summary>
         /// <param name="buttonParentElement">Represents parent <code>IWebElement</code> for initalized button object.</param>
-        /// <param name="buttonIdLocator">Represents an id locator for the button object.</param>
+        /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
-        public GenericButton(IWebElement buttonParentElement, string buttonIdLocator, WebDriverWait wait) : this(buttonParentElement.FindElements(By.Id(buttonIdLocator)).FirstOrDefault(), wait)
+        public GenericButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait) : this(buttonParentElement.FindElements(By.XPath(buttonXPathLocator)).FirstOrDefault(), wait)
         {
 
         }
@@ -95,10 +93,10 @@ namespace ConstantEvaluation.Buttons
         /// wait object constructor. 
         /// </summary>
         /// <param name="buttonParentElement">Represents parent <code>IWebElement</code> for initalized button object.</param>
-        /// <param name="buttonIdLocator">Represents an id locator for the button object.</param>
+        /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
         /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param> 
-        public GenericButton(IWebElement buttonParentElement, string buttonIdLocator, WebDriverWait wait, string waitOption) : this(buttonParentElement.FindElements(By.Id(buttonIdLocator)).FirstOrDefault(), wait, waitOption)
+        public GenericButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait, string waitOption) : this(buttonParentElement.FindElements(By.XPath(buttonXPathLocator)).FirstOrDefault(), wait, waitOption)
         {
 
         }

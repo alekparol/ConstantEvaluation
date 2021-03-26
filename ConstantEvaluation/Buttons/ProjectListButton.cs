@@ -48,9 +48,9 @@ namespace ConstantEvaluation.Buttons
         /// Creates an object using passed <code>IWebElement</code> and <code>string</code> to set a child element using id locator. Then <code>WebDriverWait</code> is used to set wait field.
         /// </summary>
         /// <param name="buttonParentElement">Represents parent <code>IWebElement</code> for initalized button object.</param>
-        /// <param name="buttonIdLocator">Represents an id locator for the button object.</param>
+        /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
-        public ProjectListButton(IWebElement buttonParentElement, string buttonIdLocator, WebDriverWait wait) : base(buttonParentElement, buttonIdLocator, wait)
+        public ProjectListButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait) : base(buttonParentElement, buttonXPathLocator, wait)
         {
 
         }
@@ -60,10 +60,10 @@ namespace ConstantEvaluation.Buttons
         /// wait object constructor. 
         /// </summary>
         /// <param name="buttonParentElement">Represents parent <code>IWebElement</code> for initalized button object.</param>
-        /// <param name="buttonIdLocator">Represents an id locator for the button object.</param>
+        /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
         /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param> 
-        public ProjectListButton(IWebElement buttonParentElement, string buttonIdLocator, WebDriverWait wait, string waitOption) : base(buttonParentElement, buttonIdLocator, wait, waitOption)
+        public ProjectListButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait, string waitOption) : base(buttonParentElement, buttonXPathLocator, wait, waitOption)
         {
 
         }

@@ -90,10 +90,10 @@ namespace ConstantEvaluation.View_Section_Element.Status_Elements
 
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 
-            activities = new NavBarButton(navBarPanel, "status", wait);
-            alerts = new NavBarButton(navBarPanel, "statusalerts", wait);
-            files = new NavBarButton(navBarPanel, "statusfiles", wait);
-            assignees = new NavBarButton(navBarPanel, "statusassignees", wait);
+            activities = new NavBarButton(navBarPanel, ".//*[@id=\"status\"]", wait);
+            alerts = new NavBarButton(navBarPanel, ".//*[@id=\"statusalerts\"]", wait);
+            files = new NavBarButton(navBarPanel, ".//*[@id=\"statusfiles\"]", wait);
+            assignees = new NavBarButton(navBarPanel, ".//*[@id=\"statusassignees\"]", wait);
         }
     }
 }

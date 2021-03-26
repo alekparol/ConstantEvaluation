@@ -107,6 +107,7 @@
     <Compile Include="View Section Element\Status Elements\StatusNavBar.cs" />
     <Compile Include="Waits\Enums.cs" />
     <Compile Include="Waits\Wait.cs" />
+    <Compile Include="Waits\XPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -6,72 +6,70 @@ using System.Linq;
 
 namespace ConstantEvaluation.Buttons
 {
-    public class ListMenuButton
+    public class ListMenuButton : GenericButton
     {
         /* Fields */
 
-        protected IWebDriver driver;
-
-        protected IWebElement buttonWebElement;
+        new protected string waitOption = "ProjectHomePageButtonClick";
 
         /* Properties */
 
-        public string GetButtonName
-        {
-            get
-            {
-                return buttonWebElement.Text;
-            }
-        }
-
         /* Methods */
-        public void ButtonClick()
-        {
-            if (buttonWebElement != null)
-            {
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
-                buttonWebElement.Click();
-
-                // Wait for the loading animation to appear and then to disapeear. 
-                //wait.Until(ExpectedConditions.ElementIsVisible(By.Id("cup_lod")));
-                //wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.Id("cup_lod")));
-            }
-        }
 
 
-        /* Constructors */
+        /* Constructors //li[contains(@class,"mnu_shw") and contains(text(), "Delivery")] */
 
-        public ListMenuButton()
+        /// <summary>
+        /// Creates an empty object.
+        /// </summary>
+        public ListMenuButton() : base()
         {
 
         }
 
-        public ListMenuButton(IWebElement parentElement, IWebDriver driver, string xpathClassLocator)
+        /// <summary>
+        /// Creates an object using passed <code>IWebElement</code> and <code>WebDriverWait</code>.
+        /// </summary>
+        /// <param name="buttonWebElement">Represents <code>IWebElement</code> of a given page button.</param>
+        /// <param name="wait">Represents <code>WebDriverWait</code> init setting.</param>
+        public ListMenuButton(IWebElement buttonWebElement, WebDriverWait wait) : base(buttonWebElement, wait)
         {
-            IReadOnlyCollection<IWebElement> auxiliaryCollection;
-            this.driver = driver;
 
-            auxiliaryCollection = parentElement.FindElements(By.XPath(xpathClassLocator));
-            if (auxiliaryCollection.Count == 1) buttonWebElement = auxiliaryCollection.ElementAt(0);
         }
 
-        public ListMenuButton(IReadOnlyCollection<IWebElement> listMenuCollection, IWebDriver driver, string classLocator)
+        /// <summary>
+        /// Creates an object using passed <code>IWebElement</code> and <code>WebDriverWait</code>. Then wait class constructor is called with usage of wait option passed as an argument.
+        /// </summary>
+        /// <param name="buttonWebElement">Represents <code>IWebElement</code> of a given page button.</param>
+        /// <param name="wait">Represents <code>WebDriverWait</code> init setting.</param>
+        /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param>
+        public ListMenuButton(IWebElement buttonWebElement, WebDriverWait wait, string waitOption) : base(buttonWebElement, wait, waitOption)
         {
-            IReadOnlyCollection<IWebElement> auxiliaryCollection;
-            this.driver = driver;
 
-            buttonWebElement = listMenuCollection.FirstOrDefault(x => x.GetAttribute("class")
-                                                                       .Contains(classLocator));
         }
 
-        public ListMenuButton(IReadOnlyCollection<IWebElement> listMenuCollection, IWebDriver driver, string classLocator, string containingText)
+        /// <summary>
+        /// Creates an object using passed <code>IWebElement</code> and <code>string</code> to set a child element using id locator. Then <code>WebDriverWait</code> is used to set wait field.
+        /// </summary>
+        /// <param name="buttonParentElement">Represents parent <code>IWebElement</code> for initalized button object.</param>
+        /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
+        /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
+        public ListMenuButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait) : base(buttonParentElement, buttonXPathLocator, wait)
         {
-            IReadOnlyCollection<IWebElement> auxiliaryCollection;
-            this.driver = driver;
 
-            buttonWebElement = listMenuCollection.FirstOrDefault(x => x.GetAttribute("class")
-                                                                       .Contains(classLocator)
-                                                                   && x.Text.Contains(containingText));
+        }
+
+        /// <summary>
+        /// Creates an object using passed <code>IWebElement</code> and <code>string</code> to set a child element using id locator. Then <code>WebDriverWait</code> is used to set wait field and wait option to call a 
+        /// wait object constructor. 
+        /// </summary>
+        /// <param name="buttonParentElement">Represents parent <code>IWebElement</code> for initalized button object.</param>
+        /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
+        /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
+        /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param> 
+        public ListMenuButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait, string waitOption) : base(buttonParentElement, buttonXPathLocator, wait, waitOption)
+        {
+
         }
     }
 }

@@ -52,6 +52,16 @@ namespace ConstantEvaluation
             ClickableWait(wait, "//*[@class=\"dsh_tds_ttl\"]");
         }
 
+        public void InvisibilityOfElement(WebDriverWait wait, string xpathLocator)
+        {
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpathLocator)));
+        }
+
+        public void InivisilibityOfMenu(WebDriverWait wait)
+        {
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(@class,\"m1 lay_flt\"])")));
+        }
+
 
         public Wait(WebDriverWait wait, string waitOption)
         {
@@ -64,6 +74,10 @@ namespace ConstantEvaluation
                     ClickableProjects(wait);
                     break;
                 case "ProjectHomePage":
+                    ClickableTasks(wait);
+                    break;
+                case "ProjectHomePageButtonClick":
+                    LoadingWait(wait, cupLoadingId);
                     ClickableTasks(wait);
                     break;
             }

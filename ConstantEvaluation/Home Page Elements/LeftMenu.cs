@@ -32,6 +32,8 @@ namespace ConstantEvaluation.Home_Page_Elements
         private LeftMenuButton usersView;
         private LeftMenuButton workflowsView;
 
+        protected WebDriverWait wait;
+
         /* Properties */
 
         public LeftMenuButton TasksView
@@ -140,7 +142,7 @@ namespace ConstantEvaluation.Home_Page_Elements
 
             IReadOnlyCollection<IWebElement> auxiliaryCollection;
 
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
             wait.Until(ExpectedConditions.ElementIsVisible(By.Id("lup_actionPanel")));
 
             auxiliaryCollection = driver.FindElements(By.Id("lup_actionPanel"));

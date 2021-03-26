@@ -1,5 +1,6 @@
 ﻿using ConstantEvaluation.Buttons;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace ConstantEvaluation.Lists.List_Menus
         protected ListMenuButton markAsFailedButton;
         protected ListMenuButton unclaimButton;
         protected ListMenuButton copyToClipboardButton;
+
+        protected WebDriverWait wait;
 
         /* Properties */
 
@@ -65,6 +68,7 @@ namespace ConstantEvaluation.Lists.List_Menus
         public AssigneeListMenu(IWebDriver driver) : base(driver)
         {
             IReadOnlyCollection<IWebElement> auxiliaryCollection;
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 
             auxiliaryCollection = driver.FindElements(By.XPath("//*[@class='m1 lay_flt']"));
             if (auxiliaryCollection.Count != 1) throw new Exception(String.Format("Menu panel was not found on the page or multiple were found."));
@@ -72,12 +76,12 @@ namespace ConstantEvaluation.Lists.List_Menus
             menuPanel = auxiliaryCollection.ElementAt(0);
             menuOptions = menuPanel.FindElements(By.TagName("li"));
 
-            tagJobButton = new ListMenuButton(menuOptions, driver, "mnu_tag");
-            markAsCompleteButton = new ListMenuButton(menuOptions, driver, "mnu_acp");
-            markAsPassedButton = new ListMenuButton(menuOptions, driver, "mnu_pas");
-            markAsFailedButton = new ListMenuButton(menuOptions, driver, "mnu_del");
-            unclaimButton = new ListMenuButton(menuOptions, driver, "mnu_unc");
-            copyToClipboardButton = new ListMenuButton(menuOptions, driver, "mnu_cpy");
+            tagJobButton = new ListMenuButton(menuPanel, ".//li[contains(@class,\"mnu_tag\")]", wait);
+            markAsCompleteButton = new ListMenuButton(menuPanel, ".//li[contains(@class,\"mnu_acp\")]", wait);
+            markAsPassedButton = new ListMenuButton(menuPanel, ".//li[contains(@class,\"mnu_pas\")]", wait);
+            markAsFailedButton = new ListMenuButton(menuPanel, ".//li[contains(@class,\"mnu_del\")]", wait);
+            unclaimButton = new ListMenuButton(menuPanel, ".//li[contains(@class,\"mnu_unc\")]", wait);
+            copyToClipboardButton = new ListMenuButton(menuPanel, ".//li[contains(@class,\"mnu_cpy\")]", wait);
         }
     }
 }
