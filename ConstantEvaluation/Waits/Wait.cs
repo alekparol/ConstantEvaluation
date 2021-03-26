@@ -62,6 +62,16 @@ namespace ConstantEvaluation
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(@class,\"m1 lay_flt\"])")));
         }
 
+        public void VisibilityOfElement(WebDriverWait wait, string xpathLocator)
+        {
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpathLocator)));
+        }
+
+        public void FilterVisible(WebDriverWait wait)
+        {
+            VisibilityOfElement(wait, "cup_lf");
+        }
+
 
         public Wait(WebDriverWait wait, string waitOption)
         {

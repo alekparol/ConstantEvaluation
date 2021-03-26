@@ -1,16 +1,20 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ConstantEvaluation.Buttons
 {
-    public class FilterInitButton : GenericButton
+    public class LeftMenuButton2 : GenericButton
     {
         /* Fields */
 
         new protected string waitOption = "ProjectHomePageButtonClick";
 
-        protected string displayedClass = "icn_flt_on";
+        protected string displayedClass = "hdr_sub_sel";
 
         /* Properties */
 
@@ -57,7 +61,7 @@ namespace ConstantEvaluation.Buttons
         /// <summary>
         /// Creates an empty object.
         /// </summary>
-        public FilterInitButton() : base()
+        public LeftMenuButton2() : base()
         {
 
         }
@@ -67,7 +71,7 @@ namespace ConstantEvaluation.Buttons
         /// </summary>
         /// <param name="buttonWebElement">Represents <code>IWebElement</code> of a given page button.</param>
         /// <param name="wait">Represents <code>WebDriverWait</code> init setting.</param>
-        public FilterInitButton(IWebElement buttonWebElement, WebDriverWait wait) : base(buttonWebElement, wait)
+        public LeftMenuButton2(IWebElement buttonWebElement, WebDriverWait wait) : base(buttonWebElement, wait)
         {
 
         }
@@ -78,7 +82,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="buttonWebElement">Represents <code>IWebElement</code> of a given page button.</param>
         /// <param name="wait">Represents <code>WebDriverWait</code> init setting.</param>
         /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param>
-        public FilterInitButton(IWebElement buttonWebElement, WebDriverWait wait, string waitOption) : base(buttonWebElement, wait, waitOption)
+        public LeftMenuButton2(IWebElement buttonWebElement, WebDriverWait wait, string waitOption) : base(buttonWebElement, wait, waitOption)
         {
 
         }
@@ -89,7 +93,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="buttonParentElement">Represents parent <code>IWebElement</code> for initalized button object.</param>
         /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
-        public FilterInitButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait) : base(buttonParentElement, buttonXPathLocator, wait)
+        public LeftMenuButton2(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait) : base(buttonParentElement, buttonXPathLocator, wait)
         {
 
         }
@@ -102,7 +106,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
         /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param> 
-        public FilterInitButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait, string waitOption) : base(buttonParentElement, buttonXPathLocator, wait, waitOption)
+        public LeftMenuButton2(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait, string waitOption) : base(buttonParentElement, buttonXPathLocator, wait, waitOption)
         {
 
         }
