@@ -208,5 +208,209 @@ namespace ConstantEvaluation_Tests
                 }
             }
         }
+
+        [TestMethod()]
+        public void SystemTest2()
+        {
+            using (var driver = new ChromeDriver())
+            {
+
+                /* Opening Configuration File and Loading Init Data */
+
+                if (File.Exists("configurationfile.xml") == false)
+                {
+                    throw new Exception("Configuration file do not exists in the program's directory.");
+                }
+
+                XmlDocument configurationFile = new XmlDocument();
+                configurationFile.Load("configurationfile.xml");
+
+                string projectName = configurationFile.SelectSingleNode("//project").InnerText;
+                string settingInProgess = configurationFile.SelectSingleNode("//setting_inprogress").InnerText;
+                string settingCompleted = configurationFile.SelectSingleNode("//setting_completed").InnerText;
+
+                if (projectName == String.Empty || settingInProgess == String.Empty || settingCompleted == String.Empty)
+                {
+                    throw new Exception(String.Format("At least one of the configuration arguments is empty. ProjectName: {0}, SettingInProgressName: {1}, SettingCompletedName: {2}", projectName, settingInProgess, settingCompleted));
+                }
+
+                /* Initializing the Driver and Navigating to TMS Home Page */
+
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+
+                driver.Manage().Window.Maximize();
+                driver.Navigate().GoToUrl("https://tms.lionbridge.com/");
+
+                wait.Until(ExpectedConditions.UrlMatches("https://tms.lionbridge.com/"));
+
+                /**/
+
+                TMSProjectsPage tmsProjectsPage = new TMSProjectsPage(driver);
+                tmsProjectsPage.ClickChosenProject(projectName);
+
+                TMSProjectHomePage tmsProjectHomePage = new TMSProjectHomePage(driver);
+                tmsProjectHomePage.ChangeItemsPerPageToMinimum(driver);
+
+                tmsProjectHomePage.StatusClick();
+                TMSStatusPage tmsStatusPage = new TMSStatusPage(driver);
+
+                tmsStatusPage.AssingeeClick();
+                TMSAssigneesSubpage tmsAssigneesSubpage = new TMSAssigneesSubpage(driver);
+
+                tmsAssigneesSubpage.InitializeFiltersPanel(driver);
+
+                if (tmsAssigneesSubpage.AssigneeCount == 1)
+                {
+                    throw new Exception("Activities drop down list is empty. Program now will shut down. ");
+                }
+
+                tmsAssigneesSubpage.ChoseActivityOption(driver, settingInProgess);
+                tmsAssigneesSubpage = new TMSAssigneesSubpage(driver);
+
+                /*PageNavBar pageNavBar = new PageNavBar(driver);
+
+                if (pageNavBar.ItemsPerPage != null)
+                {
+                    pageNavBar.ItemsPerPage.ChoseDropDownOption(driver, "1000");
+                }*/
+
+                tmsAssigneesSubpage = new TMSAssigneesSubpage(driver);
+
+                AssigneeList assigneeList = new AssigneeList(driver);
+                List<AssigneeData> listAssigneeData = new List<AssigneeData>();
+
+                foreach (AssigneeItem assigneeItem in assigneeList.AssigneeItemsList)
+                {
+                    listAssigneeData.Add(new AssigneeData(assigneeItem));
+                }
+
+                assigneeList.TagAllJobs(driver);
+
+                tmsAssigneesSubpage = new TMSAssigneesSubpage(driver);
+                tmsAssigneesSubpage.LeftMenu.JobsView.ButtonClick();
+
+                wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("r_L")));
+
+                JobList jobList = new JobList(driver);
+
+                foreach (AssigneeData assigneeData in listAssigneeData)
+                {
+                    foreach(AssigneeDataElement assigneeDataElement in assigneeData.assigneeDataElements)
+                    {
+                        
+                        string jobName = assigneeDataElement.jobName.Trim();
+                        jobList.JobShowHistory(driver, jobName);
+
+                        HistoryPopUp historyPopUp = new HistoryPopUp(driver);
+                        historyPopUp.InitializeFiltersPanel(driver);
+
+                        historyPopUp.ChoseSourceLanguageOption(driver, assigneeDataElement.sourceLanguage);
+                        historyPopUp.ChoseTargetLanguageOption(driver, assigneeDataElement.targetLanguage);
+                        historyPopUp.ChoseActivityOption(driver, settingCompleted);
+
+                        HistoryList historyList = new HistoryList(driver);
+
+                        assigneeDataElement.TranslatorName = historyList.HistoryItemsList[0].HistoryItemElements[0].StepCompletedBy;
+
+                        historyPopUp.CloseButtonClick(driver);
+                    }
+                }
+
+                
+                //historyList.HistoryItemsList[0].HistoryItemElements[0].StepCompletedByClick(driver);
+
+                
+
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "TestFile.xlsx");
+
+                using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(path, SpreadsheetDocumentType.Workbook))
+                {
+
+                    // Add a WorkbookPart to the document.
+                    WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
+                    workbookpart.Workbook = new Workbook();
+
+                    // Add a WorksheetPart to the WorkbookPart.
+                    WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
+                    worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+                    // Add Sheets to the Workbook.
+                    Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.
+                                                        AppendChild<Sheets>(new Sheets());
+
+                    // Append a new worksheet and associate it with the workbook.
+                    Sheet sheet = new Sheet()
+                    {
+                        Id = spreadsheetDocument.WorkbookPart.
+                                                     GetIdOfPart(worksheetPart),
+                        SheetId = 1,
+                        Name = "mySheet"
+                    };
+
+
+                    sheets.Append(sheet);
+                    SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
+
+
+                    UInt32 rowIndex = 0;
+
+                    foreach (var assigneeData in listAssigneeData)
+                    {
+                        foreach (var assigneeDataElement in assigneeData.assigneeDataElements)
+                        {
+                            var row = new Row() { RowIndex = rowIndex };
+
+                            var firstNameCell = new Cell() { CellReference = "A" + (rowIndex + 1) };
+                            firstNameCell.CellValue = new CellValue(assigneeDataElement.jobName);
+                            firstNameCell.DataType = CellValues.String;
+
+                            row.AppendChild(firstNameCell);
+
+                            Cell secondNameCell = new Cell() { CellReference = "B" + (rowIndex + 1) };
+                            secondNameCell.CellValue = new CellValue(assigneeDataElement.sourceLanguage);
+                            secondNameCell.DataType = new EnumValue<CellValues>(CellValues.String);
+
+                            row.AppendChild(secondNameCell);
+
+                            Cell thirdNameCell = new Cell() { CellReference = "C" + (rowIndex + 1) };
+                            thirdNameCell.CellValue = new CellValue(assigneeDataElement.targetLanguage);
+                            thirdNameCell.DataType = new EnumValue<CellValues>(CellValues.String);
+
+                            row.AppendChild(thirdNameCell);
+
+                            Cell fourthNameCell = new Cell() { CellReference = "D" + (rowIndex + 1) };
+                            fourthNameCell.CellValue = new CellValue(assigneeDataElement.reviewerName);
+                            fourthNameCell.DataType = new EnumValue<CellValues>(CellValues.String);
+
+                            row.AppendChild(fourthNameCell);
+
+                            Cell fifthNameCell = new Cell() { CellReference = "E" + (rowIndex + 1) };
+                            fifthNameCell.CellValue = new CellValue(assigneeDataElement.translatorName);
+                            fifthNameCell.DataType = new EnumValue<CellValues>(CellValues.String);
+
+                            row.AppendChild(fifthNameCell);
+
+                            Cell sixthNameCell = new Cell() { CellReference = "F" + (rowIndex + 1) };
+                            sixthNameCell.CellValue = new CellValue(assigneeDataElement.effort);
+                            sixthNameCell.DataType = CellValues.String;
+
+                            row.AppendChild(sixthNameCell);
+
+                            Cell seventhNameCell = new Cell() { CellReference = "G" + (rowIndex + 1) };
+                            seventhNameCell.CellValue = new CellValue(assigneeDataElement.wordcount);
+                            seventhNameCell.DataType = CellValues.String;
+
+                            row.AppendChild(seventhNameCell);
+
+                            sheetData.AppendChild(row);
+
+                            rowIndex++;
+                        }
+                    }
+
+                    workbookpart.Workbook.Save();
+                }
+            }
+        }
     }
 }

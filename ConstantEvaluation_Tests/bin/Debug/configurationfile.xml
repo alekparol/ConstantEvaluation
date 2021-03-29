@@ -1,5 +1,5 @@
 <configuration>
 <project>Porsche Service Trainings THB</project>
-<setting_inprogress>IC_Editing</setting_inprogress>
-<setting_completed>Translation</setting_completed>
+<setting_inprogress>Translation</setting_inprogress>
+<setting_completed>PM_Approval</setting_completed>
 </configuration>

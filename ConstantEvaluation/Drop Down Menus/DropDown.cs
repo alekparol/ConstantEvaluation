@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ConstantEvaluation.Drop_Down_Menus
 {
-    public class DropDown
+    public class DropDown : IDropDown
     {
 
         /* Fields */
@@ -78,7 +78,7 @@ namespace ConstantEvaluation.Drop_Down_Menus
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 
                 dropDownOptions.Where(x =>
-                                      x.Text.Contains(chosenOption))
+                                      x.Text.Equals(chosenOption))
                                      .ElementAt(0).Click();
 
                 wait.Until(ExpectedConditions.ElementIsVisible(By.Id("cup_lod")));

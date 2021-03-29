@@ -6,6 +6,10 @@ namespace ConstantEvaluation.Buttons
     {
         /* Fields */
 
+        new protected string waitOption = "ProjectHomePageButtonClick";
+
+        protected string displayedClass = "hdr_sub_sel";
+
         /* Properties */
 
         public override int ButtonIsClicked

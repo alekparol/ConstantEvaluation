@@ -49,10 +49,17 @@ namespace ConstantEvaluation.List_Items.JobsItem
 
         public void JobsJobClick(IWebDriver driver)
         {
+            //var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 
-            jobsEffort.Click();
+            String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject){ arguments[0].fireEvent('onmouseover');}";
+            String onClickScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('click',true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject){ arguments[0].fireEvent('onclick');}";
+
+            ((IJavaScriptExecutor)driver).ExecuteScript(mouseOverScript, elementObject);
+            ((IJavaScriptExecutor)driver).ExecuteScript(onClickScript, elementObject);
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class=\"m1 lay_flt\"]")));
+            // wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class=\"m1 lay_flt\"]")));
         }
 
         /* Constructors */
@@ -63,8 +70,10 @@ namespace ConstantEvaluation.List_Items.JobsItem
         }
         public JobsItem(IWebElement elementObject) : base(elementObject)
         {
-            jobsName = elementTableData.FirstOrDefault(x => x.GetAttribute("class")
-                                                             .Contains("firstColumn"));
+            //jobsName = elementTableData.FirstOrDefault(x => x.FindElement(By.TagName("ul")).GetAttribute("class")
+            //                                                 .Contains("firstColumn")).FindElement(By.TagName("ul"));
+
+            jobsName = elementTableData.ElementAt(0).FindElement(By.XPath(".//ul[@class=\"firstColumn\"]"));
 
             jobsLanguages = elementTableData.FirstOrDefault(x => jobsLanguagesRegex.IsMatch(x.Text));
             jobsEffort = elementTableData.ElementAt(elementTableData.Count - 1);

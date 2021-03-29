@@ -72,6 +72,11 @@ namespace ConstantEvaluation
             VisibilityOfElement(wait, "cup_lf");
         }
 
+        public void LoggedUserMenuVisible(WebDriverWait wait)
+        {
+            VisibilityOfElement(wait, "//*[@id=\"usr_act\" and contains(@class,\"lay_fit\")]");
+        }
+
 
         public Wait(WebDriverWait wait, string waitOption)
         {
@@ -89,6 +94,9 @@ namespace ConstantEvaluation
                 case "ProjectHomePageButtonClick":
                     LoadingWait(wait, cupLoadingId);
                     ClickableTasks(wait);
+                    break;
+                case "LoggedUserClicked":
+                    LoggedUserMenuVisible(wait);
                     break;
             }
         }

@@ -85,6 +85,14 @@ namespace ConstantEvaluation.Lists.History_Windows
 
         /* Methods */
 
+        public void CloseButtonClick(IWebDriver driver)
+        {
+            closeButton.Click();
+
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.Id("pup")));
+        }
+
         public void InitializeFiltersPanel(IWebDriver driver)
         {
             historyFiltersInitBar.FiltersInitButtonClick();

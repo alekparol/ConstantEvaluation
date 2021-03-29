@@ -2,6 +2,7 @@
 using ConstantEvaluation.List_Items.AssigneeItem;
 using ConstantEvaluation.Lists.List_Menus;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -84,38 +85,78 @@ namespace ConstantEvaluation.Lists
             }
         }
 
-        /*public void SelectMultipleJobs(IWebDriver driver, int rangeStart, int rangeEnd)
+        public void SelectMultipleJobs(IWebDriver driver, int rangeStart, int rangeEnd)
         {
-            if (AssigneesJobsListIsEmpty == false && rangeEnd <= assigneesJobsList.Count)
+            if (assigneeItemsList.Count != 0 && rangeEnd <= assigneeItemsList.Count && rangeStart <= assigneeItemsList.Count && rangeStart < rangeEnd)
             {
-                if (assigneesJobsList.ElementAt(rangeStart).JobsButtonIsEnabled == 1 && assigneesJobsList.ElementAt(rangeEnd).JobsButtonIsEnabled == 1)
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+                Actions selectingMultipleItems = new Actions(driver);
+
+                assigneeItemsList.ElementAt(rangeStart).AssigneeItemElements[0].AssigneeJobClick(driver);
+
+                selectingMultipleItems
+                .KeyDown(Keys.Shift)
+                .Click(driver.FindElement(By.ClassName("r_GH")))
+                .MoveToElement(driver.FindElement(By.XPath("(//*[@class=\"r_L\"])[last()]")))
+                .Build()
+                .Perform();
+
+                assigneeItemsList.ElementAt(rangeEnd).AssigneeItemElements[assigneeItemsList.ElementAt(rangeEnd).AssigneeItemElements.Count - 1].AssigneeJobClick(driver);
+
+                wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class='m1 lay_flt']")));
+                assigneeListMenu = new AssigneeListMenu(driver);
+                /*if (assigneesJobsList.ElementAt(rangeStart).JobsButtonIsEnabled == 1 && assigneesJobsList.ElementAt(rangeEnd).JobsButtonIsEnabled == 1)
                 {
-                    Actions selectingMultipleItems = new Actions(driver);
-
-                    selectingMultipleItems.Click(assigneesJobsList.ElementAt(rangeStart).GetJobButton)
-                    .KeyDown(Keys.Shift)
-                    .Click(driver.FindElement(By.ClassName("r_GH")))
-                    .MoveToElement(assigneesJobsList.ElementAt(rangeEnd).GetJobButton)
-                    .Click(assigneesJobsList.ElementAt(rangeEnd).GetJobButton)
-                    .Build()
-                    .Perform();
-
-                    assigneeJobMenu = new AssingeesOnClickJobsMenu(driver);
-                }
+                    
+                }*/
             }
         }
 
         public void TagMultipleJobs(IWebDriver driver, int rangeStart, int rangeEnd)
         {
-            if (AssigneesJobsListIsEmpty == false && rangeEnd <= assigneesJobsList.Count)
+            if (assigneeItemsList.Count != 0 && rangeEnd <= assigneeItemsList.Count && rangeStart <= assigneeItemsList.Count && rangeStart < rangeEnd)
             {
-                if (assigneesJobsList.ElementAt(rangeStart).JobsButtonIsEnabled == 1 && assigneesJobsList.ElementAt(rangeEnd).JobsButtonIsEnabled == 1)
-                {
-                    SelectMultipleJobs(driver, rangeStart, rangeEnd);
-                    assigneeJobMenu.ClickTagJobsButton(driver);
-                }
+                SelectMultipleJobs(driver, rangeStart, rangeEnd);
+                assigneeListMenu.ClickTagJobs();
             }
-        }*/
+        }
+
+
+        public void SelectAllJobs(IWebDriver driver)
+        {
+            if (assigneeItemsList.Count != 0)
+            {
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+                Actions selectingMultipleItems = new Actions(driver);
+
+                IReadOnlyCollection<IWebElement> listofJobs = driver.FindElements(By.ClassName("r_L"));
+
+                selectingMultipleItems
+                .Click(listofJobs.ElementAt(0))
+                .KeyDown(Keys.Shift)
+                .Click(driver.FindElement(By.ClassName("r_GH")))
+                .MoveToElement(listofJobs.ElementAt(listofJobs.Count - 1))
+                .Click(listofJobs.ElementAt(listofJobs.Count - 1))
+                .Build()
+                .Perform();
+
+                //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class='m1 lay_flt']")));
+                assigneeListMenu = new AssigneeListMenu(driver);
+                /*if (assigneesJobsList.ElementAt(rangeStart).JobsButtonIsEnabled == 1 && assigneesJobsList.ElementAt(rangeEnd).JobsButtonIsEnabled == 1)
+                {
+                    
+                }*/
+            }
+        }
+
+        public void TagAllJobs(IWebDriver driver)
+        {
+            if (assigneeItemsList.Count != 0)
+            {
+                SelectAllJobs(driver);
+                assigneeListMenu.ClickTagJobs();
+            }
+        }
 
 
         /* Constructors */

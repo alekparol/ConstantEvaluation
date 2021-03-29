@@ -52,16 +52,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buttons\Button.cs" />
+    <Compile Include="Buttons\Logged User Buttons\LoggedUserButton.cs" />
+    <Compile Include="Buttons\IGenericButton.cs" />
+    <Compile Include="Buttons\TO CHANGE\Button.cs" />
     <Compile Include="Buttons\FilterInitButton.cs" />
     <Compile Include="Buttons\GenericButton.cs" />
-    <Compile Include="Buttons\LeftMenuButton.cs" />
+    <Compile Include="Buttons\TO CHANGE\LeftMenuButton.cs" />
+    <Compile Include="Buttons\TO CHANGE\LeftMenuButton2.cs" />
     <Compile Include="Buttons\ListMenuButton.cs" />
     <Compile Include="Buttons\NavBarButton.cs" />
     <Compile Include="Buttons\ProjectListButton.cs" />
+    <Compile Include="Data\AD.cs" />
     <Compile Include="Data\AssigneeData.cs" />
     <Compile Include="Data\AssigneeDataElement.cs" />
     <Compile Include="Drop Down Menus\DropDown.cs" />
+    <Compile Include="Drop Down Menus\IDropDown.cs" />
     <Compile Include="Drop Down Menus\LoggedUserDropDown.cs" />
     <Compile Include="Drop Down Menus\PopUpDropDown.cs" />
     <Compile Include="Home Page Elements\AppBoard.cs" />
