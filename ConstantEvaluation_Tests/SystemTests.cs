@@ -316,99 +316,30 @@ namespace ConstantEvaluation_Tests
                     }
                 }
 
-                
-                //historyList.HistoryItemsList[0].HistoryItemElements[0].StepCompletedByClick(driver);
+                //string path = Path.Combine(Directory.GetCurrentDirectory(), "TestFile.xlsx");
 
-                
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "TestFile.csv");
 
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "TestFile.xlsx");
-
-                using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(path, SpreadsheetDocumentType.Workbook))
+                using (StreamWriter sw = new StreamWriter(path))
                 {
+                    string[] values1 = { "Job Name", "Reviewer Name", "Translator Name", "Source Language", "Target Language", "WordCount", "Effort" };
+                    string line1 = String.Join(";", values1);
 
-                    // Add a WorkbookPart to the document.
-                    WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
-                    workbookpart.Workbook = new Workbook();
-
-                    // Add a WorksheetPart to the WorkbookPart.
-                    WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
-                    worksheetPart.Worksheet = new Worksheet(new SheetData());
-
-                    // Add Sheets to the Workbook.
-                    Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.
-                                                        AppendChild<Sheets>(new Sheets());
-
-                    // Append a new worksheet and associate it with the workbook.
-                    Sheet sheet = new Sheet()
-                    {
-                        Id = spreadsheetDocument.WorkbookPart.
-                                                     GetIdOfPart(worksheetPart),
-                        SheetId = 1,
-                        Name = "mySheet"
-                    };
-
-
-                    sheets.Append(sheet);
-                    SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
-
-
-                    UInt32 rowIndex = 0;
+                    sw.WriteLine(line1);
 
                     foreach (var assigneeData in listAssigneeData)
                     {
                         foreach (var assigneeDataElement in assigneeData.assigneeDataElements)
                         {
-                            var row = new Row() { RowIndex = rowIndex };
+                            string[] values = { assigneeDataElement.jobName, assigneeDataElement.reviewerName, assigneeDataElement.translatorName, assigneeDataElement.sourceLanguage, assigneeDataElement.targetLanguage, assigneeDataElement.wordcount, assigneeDataElement.effort };
+                            string line = String.Join(";", values);
 
-                            var firstNameCell = new Cell() { CellReference = "A" + (rowIndex + 1) };
-                            firstNameCell.CellValue = new CellValue(assigneeDataElement.jobName);
-                            firstNameCell.DataType = CellValues.String;
-
-                            row.AppendChild(firstNameCell);
-
-                            Cell secondNameCell = new Cell() { CellReference = "B" + (rowIndex + 1) };
-                            secondNameCell.CellValue = new CellValue(assigneeDataElement.sourceLanguage);
-                            secondNameCell.DataType = new EnumValue<CellValues>(CellValues.String);
-
-                            row.AppendChild(secondNameCell);
-
-                            Cell thirdNameCell = new Cell() { CellReference = "C" + (rowIndex + 1) };
-                            thirdNameCell.CellValue = new CellValue(assigneeDataElement.targetLanguage);
-                            thirdNameCell.DataType = new EnumValue<CellValues>(CellValues.String);
-
-                            row.AppendChild(thirdNameCell);
-
-                            Cell fourthNameCell = new Cell() { CellReference = "D" + (rowIndex + 1) };
-                            fourthNameCell.CellValue = new CellValue(assigneeDataElement.reviewerName);
-                            fourthNameCell.DataType = new EnumValue<CellValues>(CellValues.String);
-
-                            row.AppendChild(fourthNameCell);
-
-                            Cell fifthNameCell = new Cell() { CellReference = "E" + (rowIndex + 1) };
-                            fifthNameCell.CellValue = new CellValue(assigneeDataElement.translatorName);
-                            fifthNameCell.DataType = new EnumValue<CellValues>(CellValues.String);
-
-                            row.AppendChild(fifthNameCell);
-
-                            Cell sixthNameCell = new Cell() { CellReference = "F" + (rowIndex + 1) };
-                            sixthNameCell.CellValue = new CellValue(assigneeDataElement.effort);
-                            sixthNameCell.DataType = CellValues.String;
-
-                            row.AppendChild(sixthNameCell);
-
-                            Cell seventhNameCell = new Cell() { CellReference = "G" + (rowIndex + 1) };
-                            seventhNameCell.CellValue = new CellValue(assigneeDataElement.wordcount);
-                            seventhNameCell.DataType = CellValues.String;
-
-                            row.AppendChild(seventhNameCell);
-
-                            sheetData.AppendChild(row);
-
-                            rowIndex++;
+                            sw.WriteLine(line);
                         }
                     }
 
-                    workbookpart.Workbook.Save();
+                    sw.Flush();
+
                 }
             }
         }

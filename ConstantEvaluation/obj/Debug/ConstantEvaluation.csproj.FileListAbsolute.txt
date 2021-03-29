@@ -10,3 +10,5 @@ C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation
 C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\obj\Debug\ConstantEvaluation.csproj.CopyComplete
 C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\obj\Debug\ConstantEvaluation.exe
 C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\obj\Debug\ConstantEvaluation.pdb
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\Aleksander.Parol\Documents\GitHub\ConstantEvaluation\ConstantEvaluation\bin\Debug\DocumentFormat.OpenXml.xml
