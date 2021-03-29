@@ -56,20 +56,23 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buttons\Logged User Buttons\LoggedUserButton.cs" />
+    <Compile Include="Buttons\ButtonWait.cs" />
+    <Compile Include="Buttons\IGenericButtonHighlighten.cs" />
     <Compile Include="Buttons\IGenericButton.cs" />
-    <Compile Include="Buttons\TO CHANGE\Button.cs" />
+    <Compile Include="Buttons\Logged User Buttons\LoggedUserButton.cs" />
     <Compile Include="Buttons\FilterInitButton.cs" />
     <Compile Include="Buttons\GenericButton.cs" />
-    <Compile Include="Buttons\TO CHANGE\LeftMenuButton.cs" />
-    <Compile Include="Buttons\TO CHANGE\LeftMenuButton2.cs" />
+    <Compile Include="Buttons\LeftMenuButton.cs" />
     <Compile Include="Buttons\ListMenuButton.cs" />
     <Compile Include="Buttons\NavBarButton.cs" />
     <Compile Include="Buttons\ProjectListButton.cs" />
-    <Compile Include="Data\AD.cs" />
     <Compile Include="Data\AssigneeData.cs" />
     <Compile Include="Data\AssigneeDataElement.cs" />
     <Compile Include="Drop Down Menus\DropDown.cs" />
+    <Compile Include="Drop Down Menus\DropDownButton.cs" />
+    <Compile Include="Drop Down Menus\DropDownContainer.cs" />
+    <Compile Include="Drop Down Menus\DropDownOptionButton.cs" />
+    <Compile Include="Drop Down Menus\FilterOptionButton.cs" />
     <Compile Include="Drop Down Menus\IDropDown.cs" />
     <Compile Include="Drop Down Menus\LoggedUserDropDown.cs" />
     <Compile Include="Drop Down Menus\PopUpDropDown.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Lists\List Menus\AssigneeListMenu.cs" />
     <Compile Include="Lists\List Menus\JobListMenu.cs" />
     <Compile Include="Lists\List Menus\ListMenu.cs" />
+    <Compile Include="Pages\PageWaitEnum.cs" />
     <Compile Include="Pages\TMSAssigneeSubpage.cs" />
     <Compile Include="Pages\TMSProjectHomePage.cs" />
     <Compile Include="Pages\TMSProjectsPage.cs" />
@@ -115,7 +119,7 @@
     <Compile Include="View Section Element\NavBar.cs" />
     <Compile Include="View Section Element\Status Elements\StatusFiltersPanel.cs" />
     <Compile Include="View Section Element\Status Elements\StatusNavBar.cs" />
-    <Compile Include="Waits\Enums.cs" />
+    <Compile Include="Buttons\ButtonWaitEnums.cs" />
     <Compile Include="Waits\Wait.cs" />
     <Compile Include="Waits\XPath.cs" />
   </ItemGroup>

@@ -16,7 +16,6 @@ namespace ConstantEvaluation.Buttons
 
         /* Methods */
 
-
         /* Constructors //li[contains(@class,"mnu_shw") and contains(text(), "Delivery")] */
 
         /// <summary>

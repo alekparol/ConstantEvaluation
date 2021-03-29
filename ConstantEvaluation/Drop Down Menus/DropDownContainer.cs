@@ -10,13 +10,8 @@ namespace ConstantEvaluation.Drop_Down_Menus
     {
         /* Fields */
 
-        private IWebElement dropDownFilter;
-        private IWebElement dropDownTitle;
         private IWebElement dropDownOptionContainer;
         private IReadOnlyCollection<IWebElement> dropDownOptions;
-
-        private string dropDownFilterId;
-        private string dropDownOptionContainerId;
 
         /* Properties */
 
@@ -43,34 +38,10 @@ namespace ConstantEvaluation.Drop_Down_Menus
             }
         }
 
-        public string DropDownSelection
-        {
-            get
-            {
-                if (dropDownFilter != null)
-                {
-                    return dropDownFilter.Text;
-                }
-                else
-                {
-                    return String.Empty;
-                }
-            }
-        }
-
         /* Methods */
-
-        public void DropDownFilterClick(IWebDriver driver)
-        {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
-
-            dropDownFilter.Click();
-            wait.Until(ExpectedConditions.ElementIsVisible(By.Id(dropDownOptionContainerId)));
-        }
 
         public void ChoseDropDownOption(IWebDriver driver, string chosenOption)
         {
-            DropDownFilterClick(driver);
 
             if (DropDownIsExpanded)
             {
@@ -88,30 +59,18 @@ namespace ConstantEvaluation.Drop_Down_Menus
 
         /* Constructors */
 
-        public DropDown()
+        public DropDownContainer()
         {
 
         }
 
-        public DropDown(IWebDriver driver, string idLocator)
+        public DropDownContainer(IWebDriver driver, string xPathLocator)
         {
-            IReadOnlyCollection<IWebElement> auxiliaryCollection;
-            dropDownFilterId = idLocator.Replace("titletext", "title");
-            dropDownOptionContainerId = idLocator.Replace("titletext", "child");
-
-            auxiliaryCollection = driver.FindElements(By.Id(idLocator));
-            if (auxiliaryCollection.Count == 1) dropDownTitle = auxiliaryCollection.ElementAt(0);
-
-            auxiliaryCollection = driver.FindElements(By.Id(dropDownFilterId));
-            if (auxiliaryCollection.Count == 1) dropDownFilter = auxiliaryCollection.ElementAt(0);
-
-            auxiliaryCollection = driver.FindElements(By.Id(dropDownOptionContainerId));
-            if (auxiliaryCollection.Count != 1) throw new Exception(String.Format("Drop down menu of id {0} on the page was not found or found more than one.", dropDownOptionContainerId));
+            IReadOnlyCollection<IWebElement>  auxiliaryCollection = driver.FindElements(By.XPath(xPathLocator));
+            if (auxiliaryCollection.Count != 1) throw new Exception(String.Format("Drop down menu of id {0} on the page was not found or found more than one.", xPathLocator));
 
             dropDownOptionContainer = auxiliaryCollection.ElementAt(0);
-
-            auxiliaryCollection = dropDownOptionContainer.FindElements(By.XPath(".//a"));
-            dropDownOptions = auxiliaryCollection;
+            dropDownOptions = dropDownOptionContainer.FindElements(By.XPath(".//a"));
         }
     }
 }

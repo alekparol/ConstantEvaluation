@@ -150,19 +150,20 @@ namespace ConstantEvaluation.Home_Page_Elements
             if (auxiliaryCollection.Count != 1) throw new Exception("Left menu panel was not found on the page or was found more than one.");
             viewsPanel = auxiliaryCollection.ElementAt(0);
 
-            tasksView = new LeftMenuButton(viewsPanel, driver, "inworktasks");
-            jobsView = new LeftMenuButton(viewsPanel, driver, "jobsdashboard");
-            planningView = new LeftMenuButton(viewsPanel, driver, "planning");
-            statusView = new LeftMenuButton(viewsPanel, driver, "status");
-            activityLogsView = new LeftMenuButton(viewsPanel, driver, "referencelog");
-            reportsView = new LeftMenuButton(viewsPanel, driver, "reports");
+            tasksView = new LeftMenuButton(viewsPanel, ".//*[@id=\"inworktasks\"]", wait);
+            jobsView = new LeftMenuButton(viewsPanel, ".//*[@id=\"jobsdashboard\"]", wait);
+            planningView = new LeftMenuButton(viewsPanel, ".//*[@id=\"planning\"]", wait);
+            statusView = new LeftMenuButton(viewsPanel, ".//*[@id=\"status\"]", wait);
+            activityLogsView = new LeftMenuButton(viewsPanel, ".//*[@id=\"referencelog\"]", wait);
+            reportsView = new LeftMenuButton(viewsPanel, ".//*[@id=\"reports\"]", wait);
 
-            referencesView = new LeftMenuButton(viewsPanel, driver, "documentreference");
-            deliverablesView = new LeftMenuButton(viewsPanel, driver, "documentdeliverable");
+            referencesView = new LeftMenuButton(viewsPanel, ".//*[@id=\"documentreference\"]", wait);
+            deliverablesView = new LeftMenuButton(viewsPanel, ".//*[@id=\"documentdeliverable\"]", wait);
 
-            categoriesView = new LeftMenuButton(viewsPanel, driver, "admincategories");
-            usersView = new LeftMenuButton(viewsPanel, driver, "projectuser");
-            workflowsView = new LeftMenuButton(viewsPanel, driver, "adminconfig");
+            categoriesView = new LeftMenuButton(viewsPanel, ".//*[@id=\"admincategories\"]", wait);
+            usersView = new LeftMenuButton(viewsPanel, ".//*[@id=\"projectuser\"]", wait);
+            workflowsView = new LeftMenuButton(viewsPanel, ".//*[@id=\"adminconfig\"]", wait);
+
         }
     }
 }

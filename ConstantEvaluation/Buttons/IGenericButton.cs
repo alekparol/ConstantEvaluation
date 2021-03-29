@@ -5,5 +5,6 @@
         string GetButtonName { get; }
 
         void ButtonClick();
+
     }
 }

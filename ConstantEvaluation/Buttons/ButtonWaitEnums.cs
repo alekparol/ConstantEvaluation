@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace ConstantEvaluation.Waits
 {
-    class Enums
+    enum ButtonWaitEnum
     {
+        
+        ProjectPageWait,
+        LoadingPageWait,
+        LoadingPopUpWait,
+
     }
 }

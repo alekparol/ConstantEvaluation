@@ -4,9 +4,12 @@ using System;
 
 namespace ConstantEvaluation.Buttons
 {
-    public class FilterInitButton : GenericButton
+    public class FilterInitButton : GenericButton, IGenericButtonHighlighten
     {
         /* Fields */
+
+        // ButtonWaitEnums waitOption = ButtonWaitEnums.ProjectPageWait; 
+
 
         new protected string waitOption = "ProjectHomePageButtonClick";
 

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConstantEvaluation.Drop_Down_Menus
+namespace ConstantEvaluation.Pages
 {
-    public class DropDownOptionButton
+    enum PageWaitEnum
     {
+        ProjectsListWait,
     }
 }

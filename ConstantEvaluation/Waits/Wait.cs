@@ -47,6 +47,11 @@ namespace ConstantEvaluation
             ClickableWait(wait, "//*[@id=\"tasks\"]");
         }
 
+        public void ClickableButton(WebDriverWait wait)
+        {
+            ClickableWait(wait, "//*[@class='hdr_sub_sel tlp_on']");
+        }
+
         public void ClickableProjects(WebDriverWait wait)
         {
             ClickableWait(wait, "//*[@class=\"dsh_tds_ttl\"]");
@@ -78,6 +83,16 @@ namespace ConstantEvaluation
         }
 
 
+        public void LeftMenuWait(WebDriverWait wait)
+        {
+            // Wait for the loading animation to appear and then to disapeear. 
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("cup_lod")));
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.Id("cup_lod")));
+
+            // Wait for the button to be displayed. This is the button which is present on all pages to which driver navigate after the click action.
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@class='hdr_sub_sel tlp_on']")));
+        }
+
         public Wait(WebDriverWait wait, string waitOption)
         {
             switch(waitOption)
@@ -92,8 +107,7 @@ namespace ConstantEvaluation
                     ClickableTasks(wait);
                     break;
                 case "ProjectHomePageButtonClick":
-                    LoadingWait(wait, cupLoadingId);
-                    ClickableTasks(wait);
+                    LeftMenuWait(wait);
                     break;
                 case "LoggedUserClicked":
                     LoggedUserMenuVisible(wait);
