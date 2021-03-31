@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConstantEvaluation.Waits
+namespace ConstantEvaluation.General_Utilities
 {
-    public enum ButtonWaitEnum
+    public enum WaitEnum
     {
         ProjectsListWait,
         ProjectPageWait,

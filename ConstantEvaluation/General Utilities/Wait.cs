@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -95,7 +96,7 @@ namespace ConstantEvaluation
 
         public Wait(WebDriverWait wait, string waitOption)
         {
-            switch(waitOption)
+            switch (waitOption)
             {
                 case "LoadingCup":
                     LoadingWait(wait, cupLoadingId);

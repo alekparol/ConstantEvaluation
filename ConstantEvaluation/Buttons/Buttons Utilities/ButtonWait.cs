@@ -1,4 +1,5 @@
-﻿using ConstantEvaluation.Waits;
+﻿using ConstantEvaluation.General_Utilities;
+using ConstantEvaluation.Waits;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -10,62 +11,14 @@ using static ConstantEvaluation.Buttons.XPathLocators;
 
 namespace ConstantEvaluation.Buttons
 {
-    public class ButtonWait
+    public class ButtonWait : GenericWait
     {
 
         /* Fields */
 
-        private WebDriverWait wait;
-        private ButtonWaitEnum waitOption;
-
         /* Properties */
 
         /* Methods */
-
-        /* Wait Base Functions */
-
-        /* 1. Loading Base Function */
-
-        /// <summary> Wait for the loading animation to appear and then to disapeear. 
-        /// </summary>
-        /// <param name="wait"></param>
-        /// <param name="xpathLocator"></param>
-        public void LoadingWait(WebDriverWait wait, string xpathLocator)
-        {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(xpathLocator)));
-            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(xpathLocator)));
-        }
-
-        /* 2. Clickable Base Function */
-
-        /// <summary> Wait for the button to be displayed. This is the button which is present on all pages to which driver navigate after the click action.
-        /// </summary>
-        /// <param name="wait"></param>
-        /// <param name="xpathLocator"></param>
-        public void ClickableWait(WebDriverWait wait, string xpathLocator)
-        {
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpathLocator)));
-        }
-
-        /* 3. Inivisibility Function */
-        /// <summary> Wait for the button to be displayed. This is the button which is present on all pages to which driver navigate after the click action.
-        /// </summary>
-        /// <param name="wait"></param>
-        /// <param name="xpathLocator"></param>
-        public void InvisibilityOfElement(WebDriverWait wait, string xpathLocator)
-        {
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpathLocator)));
-        }
-
-        /* 4. Visibility Function */
-        /// <summary> Wait for the button to be displayed. This is the button which is present on all pages to which driver navigate after the click action.
-        /// </summary>
-        /// <param name="wait"></param>
-        /// <param name="xpathLocator"></param>
-        public void VisibilityOfElement(WebDriverWait wait, string xpathLocator)
-        {
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpathLocator)));
-        }
 
         /* 1.1. Loading Functions */
 
@@ -84,6 +37,11 @@ namespace ConstantEvaluation.Buttons
         public void ClickableTasks(WebDriverWait wait)
         {
             ClickableWait(wait, TasksButton);
+        }
+
+        public void ClickableCurrentPage(WebDriverWait wait)
+        {
+            ClickableWait(wait, CurrentSubPage);
         }
 
         public void ClickableProjects(WebDriverWait wait)
@@ -126,9 +84,10 @@ namespace ConstantEvaluation.Buttons
         {
             switch (waitOption)
             {
-                case ButtonWaitEnum.ProjectsListWait:
+                /* THIS IS NOT RELATED TO BUTTONS - Rather to Pages.
+                 * case ButtonWaitEnum.ProjectsListWait:
                     ClickableProjects(wait);
-                    break;
+                    break;*/
                 case ButtonWaitEnum.ProjectPageWait:
                     ClickableTasks(wait);
                     break;
@@ -156,12 +115,12 @@ namespace ConstantEvaluation.Buttons
 
         /* Constructors */
 
-        public ButtonWait()
+        public ButtonWait() : base()
         {
 
         }
 
-        public ButtonWait(WebDriverWait wait, ButtonWaitEnum waitOption)
+        public ButtonWait(WebDriverWait wait, ButtonWaitEnum waitOption) : base(wait, waitOption)
         {
             this.wait = wait;
             this.waitOption = waitOption;

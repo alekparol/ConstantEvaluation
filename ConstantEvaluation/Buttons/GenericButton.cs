@@ -12,9 +12,6 @@ namespace ConstantEvaluation.Buttons
 
         protected WebDriverWait wait;
         protected ButtonWaitEnum waitOption;
-        
-        //protected string waitOption;
-        //protected Wait waitOptionImplementation;
 
         protected IWebElement buttonWebElement;
 

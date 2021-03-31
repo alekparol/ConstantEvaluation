@@ -56,18 +56,19 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buttons\ButtonWait.cs" />
+    <Compile Include="Buttons\Buttons Utilities\ButtonWait.cs" />
+    <Compile Include="Buttons\Buttons Utilities\ButtonXPathLocators.cs" />
     <Compile Include="Buttons\HistoryFilterInitButton.cs" />
-    <Compile Include="Buttons\IGenericButtonHighlighten.cs" />
-    <Compile Include="Buttons\IGenericButton.cs" />
-    <Compile Include="Buttons\Logged User Buttons\LoggedUserButton.cs" />
+    <Compile Include="Buttons\Buttons Utilities\IGenericButtonHighlighten.cs" />
+    <Compile Include="Buttons\Buttons Utilities\IGenericButton.cs" />
     <Compile Include="Buttons\FilterInitButton.cs" />
     <Compile Include="Buttons\GenericButton.cs" />
     <Compile Include="Buttons\LeftMenuButton.cs" />
     <Compile Include="Buttons\ListMenuButton.cs" />
     <Compile Include="Buttons\NavBarButton.cs" />
     <Compile Include="Buttons\ProjectListButton.cs" />
-    <Compile Include="Buttons\XPathLocators.cs" />
+    <Compile Include="General Utilities\WaitEnum.cs" />
+    <Compile Include="General Utilities\XPathLocators.cs" />
     <Compile Include="Data\AssigneeData.cs" />
     <Compile Include="Data\AssigneeDataElement.cs" />
     <Compile Include="Drop Down Menus\DropDown.cs" />
@@ -121,9 +122,9 @@
     <Compile Include="View Section Element\NavBar.cs" />
     <Compile Include="View Section Element\Status Elements\StatusFiltersPanel.cs" />
     <Compile Include="View Section Element\Status Elements\StatusNavBar.cs" />
-    <Compile Include="Buttons\ButtonWaitEnum.cs" />
-    <Compile Include="Waits\Wait.cs" />
-    <Compile Include="Waits\XPath.cs" />
+    <Compile Include="Buttons\Buttons Utilities\ButtonWaitEnum.cs" />
+    <Compile Include="General Utilities\Wait.cs" />
+    <Compile Include="General Utilities\XPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -55,21 +55,6 @@ namespace ConstantEvaluation.Buttons
 
         /* Methods */
 
-        /// <summary>
-        /// Clicks on the button and then waits for the conditions specified for the button type to be fulfilled.  
-        /// <exception cref="System.Exception">Thrown when a button that will be clicked is uninitialized.</exception>
-        /// </summary>
-        /*public new void ButtonClick()
-        {
-            if (buttonWebElement == null)
-            {
-                throw new Exception("Cannot click a uninitialized button.");
-            }
-
-            buttonWebElement.Click();
-            waitOptionImplementation = new Wait(wait, waitOption);
-        }*/
-
         /* Constructors */
 
         /// <summary>LeftMenuButton(
