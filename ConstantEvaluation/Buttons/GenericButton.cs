@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using ConstantEvaluation.Waits;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Linq;
@@ -10,8 +11,10 @@ namespace ConstantEvaluation.Buttons
         /* Fields */
 
         protected WebDriverWait wait;
-        protected string waitOption;
-        protected Wait waitOptionImplementation;
+        protected ButtonWaitEnum waitOption;
+        
+        //protected string waitOption;
+        //protected Wait waitOptionImplementation;
 
         protected IWebElement buttonWebElement;
 
@@ -42,7 +45,9 @@ namespace ConstantEvaluation.Buttons
             }
 
             buttonWebElement.Click();
-            waitOptionImplementation = new Wait(wait, waitOption);
+
+            ButtonWait waitImplementation = new ButtonWait(wait, waitOption);
+            waitImplementation.WaitForConditions();
         }
 
         /* Constructors */
@@ -72,7 +77,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="buttonWebElement">Represents <code>IWebElement</code> of a given page button.</param>
         /// <param name="wait">Represents <code>WebDriverWait</code> init setting.</param>
         /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param>
-        public GenericButton(IWebElement buttonWebElement, WebDriverWait wait, string waitOption) : this(buttonWebElement, wait)
+        public GenericButton(IWebElement buttonWebElement, WebDriverWait wait, ButtonWaitEnum waitOption) : this(buttonWebElement, wait)
         {
             this.waitOption = waitOption;
         }
@@ -96,7 +101,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
         /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param> 
-        public GenericButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait, string waitOption) : this(buttonParentElement.FindElements(By.XPath(buttonXPathLocator)).FirstOrDefault(), wait, waitOption)
+        public GenericButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait, ButtonWaitEnum waitOption) : this(buttonParentElement.FindElements(By.XPath(buttonXPathLocator)).FirstOrDefault(), wait, waitOption)
         {
 
         }

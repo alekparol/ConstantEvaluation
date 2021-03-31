@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace ConstantEvaluation.Waits
 {
-    enum ButtonWaitEnum
+    public enum ButtonWaitEnum
     {
-        
+        ProjectsListWait,
         ProjectPageWait,
         LoadingPageWait,
+        ProjectPageButtonLoadingWait,
+        LoggedUserMenuWait,
+        FilterMenuWait,
+        HistoryFilterMenuWait,
+        HistoryPopUpWait,
         LoadingPopUpWait,
 
     }

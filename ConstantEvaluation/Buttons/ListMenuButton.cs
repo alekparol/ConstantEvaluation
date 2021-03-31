@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using ConstantEvaluation.Waits;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,25 @@ namespace ConstantEvaluation.Buttons
     {
         /* Fields */
 
-        new protected string waitOption = "ProjectHomePageButtonClick";
-
         /* Properties */
 
         /* Methods */
 
-        /* Constructors //li[contains(@class,"mnu_shw") and contains(text(), "Delivery")] */
+        /// <summary>
+        /// Clicks on the button and then waits for the conditions specified for the button type to be fulfilled.  
+        /// <exception cref="System.Exception">Thrown when a button that will be clicked is uninitialized.</exception>
+        /// </summary>
+        public new void ButtonClick()
+        {
+            if (buttonWebElement == null)
+            {
+                throw new Exception("Cannot click a uninitialized button.");
+            }
+
+            buttonWebElement.Click();
+        }
+
+        /* Constructors */
 
         /// <summary>
         /// Creates an empty object.
@@ -33,7 +46,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="wait">Represents <code>WebDriverWait</code> init setting.</param>
         public ListMenuButton(IWebElement buttonWebElement, WebDriverWait wait) : base(buttonWebElement, wait)
         {
-
+            //waitOption = ButtonWaitEnum.ProjectPageButtonLoadingWait;
         }
 
         /// <summary>
@@ -42,7 +55,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="buttonWebElement">Represents <code>IWebElement</code> of a given page button.</param>
         /// <param name="wait">Represents <code>WebDriverWait</code> init setting.</param>
         /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param>
-        public ListMenuButton(IWebElement buttonWebElement, WebDriverWait wait, string waitOption) : base(buttonWebElement, wait, waitOption)
+        public ListMenuButton(IWebElement buttonWebElement, WebDriverWait wait, ButtonWaitEnum waitOption) : base(buttonWebElement, wait, waitOption)
         {
 
         }
@@ -55,7 +68,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
         public ListMenuButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait) : base(buttonParentElement, buttonXPathLocator, wait)
         {
-
+            //waitOption = ButtonWaitEnum.ProjectPageButtonLoadingWait;
         }
 
         /// <summary>
@@ -66,7 +79,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
         /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param> 
-        public ListMenuButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait, string waitOption) : base(buttonParentElement, buttonXPathLocator, wait, waitOption)
+        public ListMenuButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait, ButtonWaitEnum waitOption) : base(buttonParentElement, buttonXPathLocator, wait, waitOption)
         {
 
         }

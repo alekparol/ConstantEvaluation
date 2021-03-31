@@ -1,4 +1,5 @@
-﻿using ConstantEvaluation.Data;
+﻿using ConstantEvaluation.Buttons;
+using ConstantEvaluation.Data;
 using ConstantEvaluation.List_Items.AssigneeItem;
 using ConstantEvaluation.Lists;
 using ConstantEvaluation.Lists.History_Windows;
@@ -17,6 +18,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Xml;
+using ConstantEvaluation.Waits;
 
 namespace ConstantEvaluation_Tests
 {
@@ -290,6 +292,8 @@ namespace ConstantEvaluation_Tests
                 tmsAssigneesSubpage.LeftMenu.JobsView.ButtonClick();
 
                 wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("r_L")));
+                ButtonWait buttonWait = new ButtonWait(wait, ButtonWaitEnum.ProjectPageWait);
+                buttonWait.WaitForConditions();
 
                 JobList jobList = new JobList(driver);
 
@@ -322,10 +326,14 @@ namespace ConstantEvaluation_Tests
 
                 using (StreamWriter sw = new StreamWriter(path))
                 {
-                    string[] values1 = { "Job Name", "Reviewer Name", "Translator Name", "Source Language", "Target Language", "WordCount", "Effort" };
-                    string line1 = String.Join(";", values1);
+                    string[] titles = { "Project Name: " + projectName, "Completed Step: " + settingCompleted, "Ongoing Step: " + settingInProgess };
+                    string titlesLine = String.Join(";", titles);
+                    sw.WriteLine(titlesLine);
 
-                    sw.WriteLine(line1);
+                    string[]  headers = { "Job Name", "Reviewer Name", "Translator Name", "Source Language", "Target Language", "WordCount", "Effort" };
+                    string headersLine = String.Join(";", headers);
+
+                    sw.WriteLine(headersLine);
 
                     foreach (var assigneeData in listAssigneeData)
                     {

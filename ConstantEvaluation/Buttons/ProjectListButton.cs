@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using ConstantEvaluation.Waits;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace ConstantEvaluation.Buttons
@@ -6,8 +7,6 @@ namespace ConstantEvaluation.Buttons
     public class ProjectListButton : GenericButton
     {
         /* Fields */
-
-        new protected string waitOption = "ProjectHomePage";
 
         /* Properties */
 
@@ -30,7 +29,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="wait">Represents <code>WebDriverWait</code> init setting.</param>
         public ProjectListButton(IWebElement buttonWebElement, WebDriverWait wait) : base(buttonWebElement, wait)
         {
-
+            waitOption = ButtonWaitEnum.ProjectPageWait;
         }
 
         /// <summary>
@@ -39,7 +38,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="buttonWebElement">Represents <code>IWebElement</code> of a given page button.</param>
         /// <param name="wait">Represents <code>WebDriverWait</code> init setting.</param>
         /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param>
-        public ProjectListButton(IWebElement buttonWebElement, WebDriverWait wait, string waitOption) : base(buttonWebElement, wait, waitOption)
+        public ProjectListButton(IWebElement buttonWebElement, WebDriverWait wait, ButtonWaitEnum waitOption) : base(buttonWebElement, wait, waitOption)
         {
 
         }
@@ -52,7 +51,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
         public ProjectListButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait) : base(buttonParentElement, buttonXPathLocator, wait)
         {
-
+            waitOption = ButtonWaitEnum.ProjectPageWait;
         }
 
         /// <summary>
@@ -63,7 +62,7 @@ namespace ConstantEvaluation.Buttons
         /// <param name="buttonXPathLocator">Represents an XPath locator for the button object.</param>
         /// <param name="wait">Represents an option of a <code>Wait</code> object to be created.</param>
         /// <param name="waitOption">Represents an option of a <code>Wait</code> object to be created.</param> 
-        public ProjectListButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait, string waitOption) : base(buttonParentElement, buttonXPathLocator, wait, waitOption)
+        public ProjectListButton(IWebElement buttonParentElement, string buttonXPathLocator, WebDriverWait wait, ButtonWaitEnum waitOption) : base(buttonParentElement, buttonXPathLocator, wait, waitOption)
         {
 
         }

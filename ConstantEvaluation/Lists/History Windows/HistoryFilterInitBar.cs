@@ -13,7 +13,7 @@ namespace ConstantEvaluation.Lists.History_Windows
 
         private IWebElement filtersInitBar;
 
-        private FilterInitButton filtersInitButton;
+        private HistoryFilterInitButton filtersInitButton;
         private IWebElement infoMessage;
 
         /* Properties */
@@ -72,7 +72,7 @@ wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.Id("cup_lod")));
             if (auxiliaryCollection.Count != 1) throw new Exception("Filters initial panel on the page was not found or found more than one.");
             filtersInitBar = auxiliaryCollection.ElementAt(0);
 
-            filtersInitButton = new FilterInitButton(filtersInitBar, ".//button[@id=\"pup_fp_btn\"]", wait);
+            filtersInitButton = new HistoryFilterInitButton(filtersInitBar, ".//button[@id=\"pup_fp_btn\"]", wait);
 
             auxiliaryCollection = driver.FindElements(By.Id("jnotify-item-msg"));
             if (auxiliaryCollection.Count == 1) infoMessage = auxiliaryCollection.ElementAt(0);

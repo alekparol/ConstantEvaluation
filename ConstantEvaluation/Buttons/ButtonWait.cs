@@ -6,53 +6,62 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ConstantEvaluation.Buttons.XPathLocators;
 
 namespace ConstantEvaluation.Buttons
 {
     public class ButtonWait
     {
-        /* Static Variables */ 
 
-        private static string cupLoadingId = "cup_lod";
-        private static string pupLoadingId = "pup_lod";
-        private static string tasksButton = "//*[@id=\"tasks\"]";
-        private static string projectLists = "//*[@class=\"dsh_tds_ttl\"]";
-        private static string menuContainer = "//div[contains(@class,\"m1 lay_flt\"])";
-        private static string loggedUserContainer = "//*[@id=\"usr_act\" and contains(@class,\"lay_fit\")]";
-        private static string filterContainer = "cup_lf";
-        private static string pagePanelButton = "//*[@class='hdr_sub_sel tlp_on']";
+        /* Fields */
 
+        private WebDriverWait wait;
+        private ButtonWaitEnum waitOption;
+
+        /* Properties */
+
+        /* Methods */
 
         /* Wait Base Functions */
 
         /* 1. Loading Base Function */
 
-        public void LoadingWait(WebDriverWait wait, string loadingId)
+        /// <summary> Wait for the loading animation to appear and then to disapeear. 
+        /// </summary>
+        /// <param name="wait"></param>
+        /// <param name="xpathLocator"></param>
+        public void LoadingWait(WebDriverWait wait, string xpathLocator)
         {
-            if (wait != null)
-            {
-                // Wait for the loading animation to appear and then to disapeear. 
-                wait.Until(ExpectedConditions.ElementIsVisible(By.Id(loadingId)));
-                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.Id(loadingId)));
-            }
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(xpathLocator)));
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(xpathLocator)));
         }
 
         /* 2. Clickable Base Function */
 
+        /// <summary> Wait for the button to be displayed. This is the button which is present on all pages to which driver navigate after the click action.
+        /// </summary>
+        /// <param name="wait"></param>
+        /// <param name="xpathLocator"></param>
         public void ClickableWait(WebDriverWait wait, string xpathLocator)
         {
-            // Wait for the button to be displayed. This is the button which is present on all pages to which driver navigate after the click action.
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpathLocator)));
         }
 
         /* 3. Inivisibility Function */
+        /// <summary> Wait for the button to be displayed. This is the button which is present on all pages to which driver navigate after the click action.
+        /// </summary>
+        /// <param name="wait"></param>
+        /// <param name="xpathLocator"></param>
         public void InvisibilityOfElement(WebDriverWait wait, string xpathLocator)
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpathLocator)));
         }
 
         /* 4. Visibility Function */
-
+        /// <summary> Wait for the button to be displayed. This is the button which is present on all pages to which driver navigate after the click action.
+        /// </summary>
+        /// <param name="wait"></param>
+        /// <param name="xpathLocator"></param>
         public void VisibilityOfElement(WebDriverWait wait, string xpathLocator)
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpathLocator)));
@@ -62,73 +71,100 @@ namespace ConstantEvaluation.Buttons
 
         public void HomePageLoadingWait(WebDriverWait wait)
         {
-            LoadingWait(wait, cupLoadingId);
+            LoadingWait(wait, CupLoading);
         }
 
         public void ProfileLoadingWait(WebDriverWait wait)
         {
-            LoadingWait(wait, pupLoadingId);
+            LoadingWait(wait, PupLoading);
         }
 
         /* 2.1. Clickable Functions */ 
 
         public void ClickableTasks(WebDriverWait wait)
         {
-            ClickableWait(wait, tasksButton);
+            ClickableWait(wait, TasksButton);
         }
 
         public void ClickableProjects(WebDriverWait wait)
         {
-            ClickableWait(wait, projectLists);
+            ClickableWait(wait, ProjectLists);
         }
 
         /* 3.1. Invisibility Functions */
 
         public void InivisilibityOfMenu(WebDriverWait wait)
         {
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(menuContainer)));
+            InvisibilityOfElement(wait, ItemMenu);
         }
 
         /* 4.1. Visibility Functions */
 
         public void FilterVisible(WebDriverWait wait)
         {
-            VisibilityOfElement(wait, filterContainer);
+            VisibilityOfElement(wait, FilterPanel);
+        }
+
+        public void HistoryFilterVisible(WebDriverWait wait)
+        {
+            VisibilityOfElement(wait, HistoryFilterPanel);
+        }
+
+        public void HistoryPopUpVisisible(WebDriverWait wait)
+        {
+            VisibilityOfElement(wait, HistoryPopUp);
         }
 
         public void LoggedUserMenuVisible(WebDriverWait wait)
         {
-            VisibilityOfElement(wait, loggedUserContainer);
+            VisibilityOfElement(wait, LoggedUserMenu);
         }
 
         /* Main Wait Function */
 
-        /*public void WaitTill (WebDriverWait wait, ButtonWaitEnum waitOption)
+        public void WaitForConditions ()
         {
             switch (waitOption)
             {
-                case ButtonWaitEnum.LoadingPageWait:
-                    LoadingWait(wait, cupLoadingId);
-                    break;
-                case "ProjectsListReady":
+                case ButtonWaitEnum.ProjectsListWait:
                     ClickableProjects(wait);
                     break;
-                case "ProjectHomePage":
+                case ButtonWaitEnum.ProjectPageWait:
                     ClickableTasks(wait);
                     break;
-                case "ProjectHomePageButtonClick":
-                    LoadingWait(wait, cupLoadingId);
+                case ButtonWaitEnum.LoadingPageWait:
+                    HomePageLoadingWait(wait);
+                    break;
+                case ButtonWaitEnum.ProjectPageButtonLoadingWait:
+                    HomePageLoadingWait(wait);
                     ClickableTasks(wait);
                     break;
-                case "LoggedUserClicked":
+                case ButtonWaitEnum.LoggedUserMenuWait:
                     LoggedUserMenuVisible(wait);
                     break;
+                case ButtonWaitEnum.FilterMenuWait:
+                    FilterVisible(wait);
+                    break;
+                case ButtonWaitEnum.HistoryFilterMenuWait:
+                    HistoryFilterVisible(wait);
+                    break;
+                case ButtonWaitEnum.HistoryPopUpWait:
+                    HistoryPopUpVisisible(wait);
+                    break;
             }
-        }*/
+        }
+
+        /* Constructors */
 
         public ButtonWait()
         {
 
+        }
+
+        public ButtonWait(WebDriverWait wait, ButtonWaitEnum waitOption)
+        {
+            this.wait = wait;
+            this.waitOption = waitOption;
         }
     }
 }
